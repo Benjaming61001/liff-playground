@@ -18,6 +18,8 @@ jobs:
       - run: bun install
       - name: bun build
         run: bun run build
+        env:
+          VITE_APP_LIFF_ID: ${{ vars.VITE_APP_LIFF_ID }}
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
