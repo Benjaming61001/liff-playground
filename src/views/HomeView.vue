@@ -28,7 +28,11 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { liff } from '@line/liff'
+// import { liff } from '@line/liff'
+import type { Liff } from '@line/liff'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const liff: Liff = (window as any).liff
 
 const profile = ref<Awaited<ReturnType<typeof liff.getProfile>>>()
 const scanResult = ref<Awaited<ReturnType<typeof liff.scanCodeV2>>>()
