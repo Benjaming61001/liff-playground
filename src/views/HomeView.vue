@@ -13,18 +13,6 @@
     </pre>
 
     <div>
-      PROFILE PLUS
-    </div>
-    <div>
-      <button @click="getProfilePlus()">
-        getProfilePlus
-      </button>
-    </div>
-    <pre>
-      profilePlus: {{ profilePlus || '-' }}
-    </pre>
-
-    <div>
       Scan QR-Code
     </div>
     <div>
@@ -43,15 +31,10 @@ import { onMounted, ref } from 'vue'
 import { liff } from '@line/liff'
 
 const profile = ref<Awaited<ReturnType<typeof liff.getProfile>>>()
-const profilePlus = ref<Awaited<ReturnType<typeof liff.getProfilePlus>>>()
 const scanResult = ref<Awaited<ReturnType<typeof liff.scanCodeV2>>>()
 
 async function getProfile(): Promise<void> {
   profile.value = await liff.getProfile()
-}
-
-function getProfilePlus(): void {
-  profilePlus.value = liff.getProfilePlus()
 }
 
 async function scan(): Promise<void> {
