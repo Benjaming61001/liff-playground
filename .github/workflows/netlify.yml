@@ -2,7 +2,7 @@ name: Build and Deploy to Netlify
 on:
   push:
     branches:
-      - dev
+      - main
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -18,8 +18,6 @@ jobs:
       - run: bun install
       - name: bun build
         run: bun run build
-        env:
-          VITE_APP_API_URL: ${{ vars.VITE_APP_API_URL }}
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
