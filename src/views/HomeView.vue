@@ -38,7 +38,7 @@ async function setAuthHeader (): Promise<void> {
 
   if (!localVc) {
     if (!window.location.href.includes('redirect-to=vc')) {
-      liff.openWindow({url: `https://https://liff.line.me/${LIFF_ID_NAME_CARD}?redirect-to=vc`})
+      liff.openWindow({url: `https://liff.line.me/${LIFF_ID_NAME_CARD}?redirect-to=vc`})
       return
     }
     const token = await initAndGetIdToken(LIFF_ID_NAME_CARD)
@@ -48,7 +48,7 @@ async function setAuthHeader (): Promise<void> {
 
   if (!localLt) {
     if (!window.location.href.includes('redirect-to=lt')) {
-      liff.openWindow({url: `https://https://liff.line.me/${LIFF_ID_SEAT}?redirect-to=lt`})
+      liff.openWindow({url: `https://liff.line.me/${LIFF_ID_SEAT}?redirect-to=lt`})
       return
     }
     const token = await initAndGetIdToken(LIFF_ID_SEAT)
