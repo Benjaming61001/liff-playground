@@ -14,8 +14,13 @@ export function makeHeader(key: string, value: string | null = ''): ISetHeader |
 }
 
 export async function getAccessTokenNameCard(): Promise<ISetHeader | null> {
+  const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
+  if (liff.id !== liffId) {
+    liff.openWindow({ url: `https://liff.line.me/${liffId}` })
+    return null
+  }
   await liff?.init({
-    liffId: import.meta.env.VITE_APP_LIFF_ID || '',
+    liffId,
     withLoginOnExternalBrowser: true,
   })
   const accessToken = liff.getIDToken()
@@ -24,8 +29,13 @@ export async function getAccessTokenNameCard(): Promise<ISetHeader | null> {
 }
 
 export async function getAccessTokenSeatReservation(): Promise<ISetHeader | null> {
+  const liffId = import.meta.env.VITE_APP_LIFF_ID_2 || ''
+  if (liff.id !== liffId) {
+    liff.openWindow({ url: `https://liff.line.me/${liffId}` })
+    return null
+  }
   await liff?.init({
-    liffId: import.meta.env.VITE_APP_LIFF_ID_2 || '',
+    liffId,
     withLoginOnExternalBrowser: true,
   })
   const accessToken = liff.getIDToken()

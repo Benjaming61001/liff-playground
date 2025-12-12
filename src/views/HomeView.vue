@@ -26,7 +26,6 @@ import {
   getAccessTokenSeatReservation,
   type ISetHeader,
 } from '@/utils/Auth'
-import liff from '@line/liff'
 
 const isLoading = ref<boolean>(false)
 const nameCardToken = ref<ISetHeader | null>(null)
@@ -34,7 +33,6 @@ const seatReservationToken = ref<ISetHeader | null>(null)
 async function setAuthHeader (): Promise<void> {
   isLoading.value = true
   const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
-  liff.openWindow({url: `https://liff.line.me/${import.meta.env.VITE_APP_LIFF_ID_2}`})
   const authHeaderSeatReservation: ISetHeader | null = await getAccessTokenSeatReservation()
   if (authHeaderNameCard) nameCardToken.value = authHeaderNameCard
   if (authHeaderSeatReservation) seatReservationToken.value = authHeaderSeatReservation
