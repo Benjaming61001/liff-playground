@@ -37,7 +37,7 @@ async function setAuthHeader (): Promise<void> {
   }
 
   if (!localVc) {
-    if (!window.location.href.includes('redirect-to=vc')) {
+    if (!window.location.href.includes('redirect-to%3Dvc')) {
       const url = `https://liff.line.me/${LIFF_ID_NAME_CARD}?redirect-to=vc`
       if (liff.isInClient()) {
         liff.openWindow({url})
@@ -52,8 +52,8 @@ async function setAuthHeader (): Promise<void> {
   }
 
   if (!localLt) {
-    if (!window.location.href.includes('redirect-to=lt')) {
-      const url = `https://liff.line.me/${LIFF_ID_SEAT}?redirect-to=vc`
+    if (!window.location.href.includes('redirect-to%3Dlt')) {
+      const url = `https://liff.line.me/${LIFF_ID_SEAT}?redirect-to=lt`
       if (liff.isInClient()) {
         liff.openWindow({url})
       } else {
