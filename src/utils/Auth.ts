@@ -7,19 +7,14 @@ export interface ISetHeader {
 
 export function makeHeader(key: string, value: string | null = ''): ISetHeader | null {
   if (!value) return null
-  return {
-    key,
-    value,
-  }
+  return { key, value }
 }
 
 async function initAndGetIdToken(liffId: string): Promise<string | null> {
-  await liff?.init({ liffId })
-  const redirectUri = await liff.permanentLink.createUrlBy(window.location.href)
-  if (!liff.isLoggedIn()) {
-    liff.login({ redirectUri })
-    return null
-  }
+  await liff?.init({ 
+    liffId,
+    withLoginOnExternalBrowser: true
+  })
   return liff.getIDToken()
 }
 
