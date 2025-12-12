@@ -7,9 +7,9 @@
 import { onMounted } from 'vue'
 import liff from '@line/liff'
 
-onMounted((): void => {
+onMounted(async (): Promise<void> => {
   const liffId = import.meta.env.VITE_APP_LIFF_ID_2 || ''
-  liff.init({
+  await liff.init({
     liffId,
     withLoginOnExternalBrowser: true,
   })

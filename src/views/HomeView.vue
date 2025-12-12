@@ -40,9 +40,9 @@ async function setAuthHeader (): Promise<void> {
   isLoading.value = false
 }
 
-onMounted((): void => {
+onMounted(async (): Promise<void> => {
   const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
-  liff.init({
+  await liff.init({
     liffId,
     withLoginOnExternalBrowser: true,
   })
