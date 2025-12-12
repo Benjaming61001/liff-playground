@@ -8,11 +8,12 @@
         setAuthHeader
       </button>
     </div>
-    <pre>
-      setAuthHeaderResult: {{ setAuthHeaderResult || '-' }}
+    <pre style="width: 100%; white-space: break-space; word-break: break-all;">
+      nameCardToken: {{ nameCardToken || '-' }}
+      seatReservationToken: {{ seatReservationToken || '-' }}
     </pre>
     <pre>
-      is Same id Token: {{ setAuthHeaderResult?.authHeaderNameCard === setAuthHeaderResult?.authHeaderSeatReservation }}
+      is Same id Token: {{ nameCardToken?.value === seatReservationToken?.value }}
     </pre>
   </main>
 </template>
@@ -25,17 +26,13 @@ import {
   type ISetHeader,
 } from '@/utils/Auth'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const setAuthHeaderResult = ref<any>()
+const nameCardToken = ref<ISetHeader | null>(null)
+const seatReservationToken = ref<ISetHeader | null>(null)
 async function setAuthHeader (): Promise<void> {
   const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
   const authHeaderSeatReservation: ISetHeader | null = await getAccessTokenSeatReservation()
-  if (authHeaderNameCard) console.log(authHeaderNameCard)
-  if (authHeaderSeatReservation) console.log(authHeaderSeatReservation)
-  setAuthHeaderResult.value =  {
-    authHeaderNameCard,
-    authHeaderSeatReservation
-  }
+  if (authHeaderNameCard) nameCardToken.value = authHeaderNameCard
+  if (authHeaderSeatReservation) seatReservationToken.value = authHeaderSeatReservation
 }
 </script>
 
