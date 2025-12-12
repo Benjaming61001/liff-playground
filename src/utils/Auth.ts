@@ -14,14 +14,14 @@ export function makeHeader(key: string, value: string | null = ''): ISetHeader |
 }
 
 export async function getAccessTokenNameCard(): Promise<ISetHeader | null> {
-  const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
+  const liffId1 = import.meta.env.VITE_APP_LIFF_ID || ''
   const liffId2 = import.meta.env.VITE_APP_LIFF_ID_2 || ''
-  if (liff.id === liffId) {
-    liff.openWindow({ url: `https://liff.line.me/${liffId2}` })
+  if (liff.id === liffId2) {
+    liff.openWindow({ url: `https://liff.line.me/${liffId1}` })
     return null
   }
   await liff?.init({
-    liffId,
+    liffId: liffId1,
     withLoginOnExternalBrowser: true,
   })
   const accessToken = liff.getIDToken()
@@ -30,14 +30,14 @@ export async function getAccessTokenNameCard(): Promise<ISetHeader | null> {
 }
 
 export async function getAccessTokenSeatReservation(): Promise<ISetHeader | null> {
-  const liffId = import.meta.env.VITE_APP_LIFF_ID_2 || ''
   const liffId1 = import.meta.env.VITE_APP_LIFF_ID || ''
-  if (liff.id === liffId) {
-    liff.openWindow({ url: `https://liff.line.me/${liffId1}` })
+  const liffId2 = import.meta.env.VITE_APP_LIFF_ID_2 || ''
+  if (liff.id === liffId1) {
+    liff.openWindow({ url: `https://liff.line.me/${liffId2}` })
     return null
   }
   await liff?.init({
-    liffId,
+    liffId: liffId2,
     withLoginOnExternalBrowser: true,
   })
   const accessToken = liff.getIDToken()
