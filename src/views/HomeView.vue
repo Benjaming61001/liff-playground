@@ -31,6 +31,7 @@ const isLoading = ref<boolean>(false)
 const nameCardToken = ref<ISetHeader | null>(null)
 const seatReservationToken = ref<ISetHeader | null>(null)
 async function setAuthHeader (): Promise<void> {
+  console.log(isLoading.value)
   if (isLoading.value) return
   isLoading.value = true
   const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
