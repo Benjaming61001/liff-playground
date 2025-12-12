@@ -1,60 +1,38 @@
 <template>
   <main>
     <div>
-      PROFILE
+      setAuthHeader
     </div>
     <div>
-      <button @click="getProfile()">
-        getProfile
+      <button @click="setAuthHeader()">
+        setAuthHeader
       </button>
     </div>
     <pre>
-      profile: {{ profile || '-' }}
-    </pre>
-
-    <div>
-      Scan QR-Code
-    </div>
-    <div>
-      <button @click="scan()">
-        Scan
-      </button>
-    </div>
-    <pre>
-      scanResult: {{ scanResult || '-' }}
+      setAuthHeaderResult: {{ setAuthHeaderResult || '-' }}
     </pre>
   </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-// import { liff } from '@line/liff'
-import type { Liff } from '@line/liff'
+import { ref } from 'vue'
+import {
+  getAccessTokenNameCard,
+  getAccessTokenSeatReservation,
+  type ISetHeader,
+} from '@/utils/Auth'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const liff: Liff = (window as any).liff
-
-const profile = ref<Awaited<ReturnType<typeof liff.getProfile>>>()
-const scanResult = ref<Awaited<ReturnType<typeof liff.scanCodeV2>>>()
-
-async function getProfile(): Promise<void> {
-  profile.value = await liff.getProfile()
+const setAuthHeaderResult = ref<unknown>()
+async function setAuthHeader (): Promise<void> {
+  const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
+  const authHeaderSeatReservation: ISetHeader | null = await getAccessTokenSeatReservation()
+  if (authHeaderNameCard) console.log(authHeaderNameCard)
+  if (authHeaderSeatReservation) console.log(authHeaderSeatReservation)
+  setAuthHeaderResult.value =  {
+    authHeaderNameCard,
+    authHeaderSeatReservation
+  }
 }
-
-async function scan(): Promise<void> {
-  scanResult.value = await liff.scanCodeV2()
-}
-
-async function init(): Promise<void>{
-  if (import.meta.env.DEV) return
-  const liffId = import.meta.env.VITE_APP_LIFF_ID
-  await liff.init({
-    liffId,
-    withLoginOnExternalBrowser: true
-  })
-}
-
-onMounted(init)
 </script>
 
 <style scoped>
