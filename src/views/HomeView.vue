@@ -9,6 +9,7 @@
       </button>
     </div>
     <pre style="width: 100%; white-space: break-space; word-break: break-all;">
+      isLoading: {{ isLoading }}
       nameCardToken: {{ nameCardToken || '-' }}
       seatReservationToken: {{ seatReservationToken || '-' }}
     </pre>
@@ -26,13 +27,17 @@ import {
   type ISetHeader,
 } from '@/utils/Auth'
 
+const isLoading = ref<boolean>(false)
 const nameCardToken = ref<ISetHeader | null>(null)
 const seatReservationToken = ref<ISetHeader | null>(null)
 async function setAuthHeader (): Promise<void> {
+  if (isLoading.value) return
+  isLoading.value = true
   const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
   const authHeaderSeatReservation: ISetHeader | null = await getAccessTokenSeatReservation()
   if (authHeaderNameCard) nameCardToken.value = authHeaderNameCard
   if (authHeaderSeatReservation) seatReservationToken.value = authHeaderSeatReservation
+  isLoading.value = false
 }
 </script>
 
