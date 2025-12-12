@@ -14,7 +14,6 @@ export function makeHeader(key: string, value: string | null = ''): ISetHeader |
 }
 
 async function initAndGetIdToken(liffId: string): Promise<string | null> {
-  liff.openWindow({url: `https://liff.line.me/${liffId}` })
   await liff?.init({ liffId })
   const redirectUri = await liff.permanentLink.createUrlBy(window.location.href)
   if (!liff.isLoggedIn()) {
