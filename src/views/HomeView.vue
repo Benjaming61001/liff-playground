@@ -11,6 +11,9 @@
     <pre>
       setAuthHeaderResult: {{ setAuthHeaderResult || '-' }}
     </pre>
+    <pre>
+      is Same id Token: {{ setAuthHeaderResult?.authHeaderNameCard === setAuthHeaderResult?.authHeaderSeatReservation }}
+    </pre>
   </main>
 </template>
 
@@ -22,7 +25,8 @@ import {
   type ISetHeader,
 } from '@/utils/Auth'
 
-const setAuthHeaderResult = ref<unknown>()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setAuthHeaderResult = ref<any>()
 async function setAuthHeader (): Promise<void> {
   const authHeaderNameCard: ISetHeader | null = await getAccessTokenNameCard()
   const authHeaderSeatReservation: ISetHeader | null = await getAccessTokenSeatReservation()
