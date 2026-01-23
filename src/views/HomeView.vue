@@ -4,6 +4,10 @@
       nameCardToken: {{ nameCardToken }}
       seatReservationToken: {{ seatReservationToken }}
     </pre>
+
+    <div>
+      <ImageCropper src="/png/img.png" />
+    </div>
   </main>
 </template>
 
@@ -18,6 +22,7 @@ import {
   makeHeader,
   saveToken,
 } from '@/utils/Auth'
+import ImageCropper from '@/components/ImageCropper.vue'
 import liff from '@line/liff'
 
 const LIFF_ID_NAME_CARD = import.meta.env.VITE_APP_LIFF_ID || ''
@@ -27,6 +32,7 @@ const nameCardToken = ref<ISetHeader | null>(null)
 const seatReservationToken = ref<ISetHeader | null>(null)
 
 async function setAuthHeader (): Promise<void> {
+  if (import.meta.env.DEV) return
   const localVc = await getLocalToken('x-id-token-vc')
   const localLt = await getLocalToken('x-id-token-lt')
 
