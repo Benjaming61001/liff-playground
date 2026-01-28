@@ -25,9 +25,6 @@ import {
 } from '@/utils/Auth'
 import ImageCropper from '@/components/ImageCropper.vue'
 import liff from '@line/liff'
-import LIFFInspectorPlugin from '@line/liff-inspector'
-
-liff.use(new LIFFInspectorPlugin())
 
 const LIFF_ID_NAME_CARD = import.meta.env.VITE_APP_LIFF_ID || ''
 const LIFF_ID_SEAT = import.meta.env.VITE_APP_LIFF_ID_2 || ''
