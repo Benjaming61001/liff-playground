@@ -4,11 +4,6 @@
       nameCardToken: {{ nameCardToken }}
       seatReservationToken: {{ seatReservationToken }}
     </pre>
-
-    <div>
-      <img src="https://ltth-assets.line-scdn.net/ec81304f-39c5-48e3-911a-3b1fb7c3ad27.jpg" alt="">
-      <ImageCropper src="https://ltth-assets.line-scdn.net/ec81304f-39c5-48e3-911a-3b1fb7c3ad27.jpg" />
-    </div>
   </main>
 </template>
 
@@ -23,7 +18,6 @@ import {
   makeHeader,
   saveToken,
 } from '@/utils/Auth'
-import ImageCropper from '@/components/ImageCropper.vue'
 import liff from '@line/liff'
 
 const LIFF_ID_NAME_CARD = import.meta.env.VITE_APP_LIFF_ID || ''
