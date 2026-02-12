@@ -30,18 +30,19 @@ async function open(): Promise<void> {
     idToken
   })
 
-  if (liff.isInClient()) {
-    const url = 'https://liff.line.me/2008573781-8qRbpYwz'
-    liff?.openWindow({ url })
-  } else {
-    const baseUrl = window.location.origin
-    window.location.replace(`${baseUrl}/virtual-card`)
-  }
+  // if (liff.isInClient()) {
+  //   const url = 'https://liff.line.me/2008573781-8qRbpYwz'
+  //   liff?.openWindow({ url })
+  // } else {
+  //   const baseUrl = window.location.origin
+  //   window.location.replace(`${baseUrl}/virtual-card`)
+  // }
 }
 
 async function liffInit(): Promise<void> {
   const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
   await liff.init({ liffId })
+  liff.login()
 }
 
 onMounted(liffInit)
