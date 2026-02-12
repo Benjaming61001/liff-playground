@@ -42,7 +42,9 @@ async function open(): Promise<void> {
 async function liffInit(): Promise<void> {
   const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
   await liff.init({ liffId })
-  liff.login()
+  if (!liff.isLoggedIn()) { 
+    liff.login()
+  }
 }
 
 onMounted(liffInit)
