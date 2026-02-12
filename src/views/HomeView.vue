@@ -6,21 +6,21 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import liff from '@line/liff'
 
-const route = useRoute()
+// const route = useRoute()
 
 async function open(): Promise<void> {
   await liff.ready
-  if (!route.query.login) {
-    if (liff?.isLoggedIn()) {
-      liff?.logout()
-    }
-    const baseUrl = window.location.origin
-    liff?.login({ redirectUri: `${baseUrl}?login=true` })
-    return
-  }
+  // if (!route.query.login) {
+  //   if (liff?.isLoggedIn()) {
+  //     liff?.logout()
+  //   }
+  //   const baseUrl = window.location.origin
+  //   liff?.login({ redirectUri: `${baseUrl}?login=true` })
+  //   return
+  // }
   const profile = await liff?.getProfile()
   const userId = profile?.userId || ''
   const idToken = liff?.getIDToken() || ''
