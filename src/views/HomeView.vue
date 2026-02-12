@@ -10,7 +10,7 @@ import liff from '@line/liff'
 
 async function open(): Promise<void> {
   await liff.ready
-  const url = 'https://www.google.com/'
+  const url = 'https://liff.line.me/2008573781-8qRbpYwz'
   liff?.openWindow({ url })
 }
 
