@@ -6,17 +6,26 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import liff from '@line/liff'
+import { useRouter } from 'vue-router'
 
-async function liffInit(): Promise<void> {
-  const liffId = import.meta.env.VITE_APP_LIFF_ID || ''
-  await liff.init({ liffId })
-  console.log(liff.isLoggedIn())
-  if (!liff.isLoggedIn()) {
-    liff.login()
+const router = useRouter()
+
+async function init(): Promise<void> {
+  await liff.ready
+  if (liff.isLoggedIn()) {
+    router.push({ name: 'home2' })
+    return
   }
+  const targetRoute = router.resolve({
+    name: 'home2',
+  })
+  const base = window.location.origin
+  const redirectUri = `${base}${targetRoute.href}`
+  console.log({redirectUri})
+  liff.login({ redirectUri })
 }
 
-onMounted(liffInit)
+onMounted(init)
 </script>
 
 <style scoped>
