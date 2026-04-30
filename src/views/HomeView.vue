@@ -12,8 +12,11 @@ const profile = ref({})
 
 async function init(): Promise<void> {
   await liff.ready
-  liff.login()
-  profile.value = liff.getProfile()
+  if (!liff.isLoggedIn()) {
+    liff.login()
+  } else {
+    profile.value = await liff.getProfile()
+  }
 }
 
 onMounted(init)
