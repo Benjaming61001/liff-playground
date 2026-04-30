@@ -1,28 +1,19 @@
 <template>
   <main>
+    {{ profile }}
   </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import liff from '@line/liff'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
+const profile = ref({})
 
 async function init(): Promise<void> {
   await liff.ready
-  if (liff.isLoggedIn()) {
-    router.push({ name: 'home2' })
-    return
-  }
-  const targetRoute = router.resolve({
-    name: 'home2',
-  })
-  const base = window.location.origin
-  const redirectUri = `${base}${targetRoute.href}`
-  console.log({redirectUri})
-  liff.login({ redirectUri })
+  liff.login()
+  profile.value = liff.getProfile()
 }
 
 onMounted(init)
